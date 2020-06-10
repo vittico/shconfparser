@@ -62,7 +62,7 @@ class TestParser:
         assert 'cdp_neighbors' in data
         header = [' Device ID', 'Local Intrfce', 'Holdtme', 'Capability', 'Platform', 'Port ID']
         result = setup.parse_table(data['cdp_neighbors'], header)
-        assert result == None
+        assert result is None
         # TODO: need to check log message
 
     def test_dump(self, setup):

@@ -60,10 +60,7 @@ class Parser:
         return -1
 
     def _fetch_column_position(self, header):
-        position = []
-        for header_name in self.header_names:
-            position.append(header.find(header_name))
-        return position
+        return [header.find(header_name) for header_name in self.header_names]
 
     def _fetch_table_column(self, line, start, end, key, data):
         col_data = str(line[start:end]).strip()
@@ -105,11 +102,11 @@ class Parser:
         return lst1
 
     def parse_tree(self, lines):
-        data = list()
+        data = []
         for i, line in enumerate(lines):
             space = self._space_level(line.rstrip())
             line = line.strip()
-            if line != '!' and line != '' and line != 'end':
+            if line not in ['!', '', 'end']:
                 data.append({'key': line, 'level': space})
         self.data = self._convert_to_dict(data)
         return self.data
